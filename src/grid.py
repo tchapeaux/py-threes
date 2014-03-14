@@ -1,3 +1,7 @@
+from direction import DIRECTIONS
+import random
+
+
 class Grid(object):
     """Represent a grid of tiles"""
     def __init__(self, sizeX, sizeY):
@@ -23,6 +27,12 @@ class Grid(object):
         assert self.isValid(i, j)
         return self.grid[i][j] is not None
 
+    def putTile(self, i, j, newTile):
+        if not self.occupied(i, j):
+            self.grid[i][j] = newTile
+        else:
+            raise AssertionError("Tile is occupied")
+
     def moveTile(self, i, j, direction):
         """returns True if move is successful, False otherwise"""
         assert self.isValid(i, j)
@@ -47,6 +57,7 @@ class Grid(object):
             colRange = list(reversed(colRange))
         if direction.y == 1:
             rowRange = list(reversed(rowRange))
+        # we remove the row or column which does not move
         if direction.x != 0:
             colRange = colRange[1:]
         if direction.y != 0:
@@ -60,3 +71,16 @@ class Grid(object):
                 if success:
                     moveFlagsCol[i] = True
                     moveFlagsRow[j] = True
+        # adds the newTile in a row or col which moved
+        movedCols = [i for i, moved in enumerate(moveFlagsCol)]
+        movedRows = [i for i, moved in enumerate(moveFlagsRow)]
+        chosenRow = random.choice(movedRows)
+        chosenCol = random.choice(movedCols)
+        if direction == DIRECTIONS["left"]:
+            self.putTile(self.sizeX - 1, chosenRow, newTile)
+        elif direction == DIRECTIONS["right"]:
+            self.putTile(0, chosenRow, newTile)
+        elif direction == DIRECTIONS["up"]:
+            self.putTile(chosenCol, self.sizeY - 1, newTile)
+        elif direction == DIRECTIONS["down"]:
+            self.putTile(chosenCol, 0, newTile)
