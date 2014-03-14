@@ -10,7 +10,8 @@ class Grid(object):
         gString = ""
         for j in range(self.sizeY):
             for i in range(self.sizeX):
-                gString += str(self.grid[i][j]) + "\t"
+                gString += str(self.grid[i][j]) if self.grid[i][j] else "0"
+                gString += "\t"
             gString = gString[:-1]
             gString += "\n"
         return gString[:-1]

@@ -1,0 +1,28 @@
+{
+    "folders":
+    [
+        {
+            "follow_symlinks": true,
+            "name": "py-THREES",
+            "path": "./",
+            "folder_exclude_patterns": ["__pycache__"],
+            "file_exclude_patterns":
+            [
+                "*.pyc",
+                "*.pyo",
+                "__init__.py",
+                "*.tmp",
+                ".pydevproject",
+                ".project"
+            ]
+        }
+    ],
+    "build_systems":
+    [
+        {
+            "name": "Launch main",
+            "shell_cmd": "python3 main.py",
+            "working_dir": "$project_path/src"
+        }
+    ]
+}
