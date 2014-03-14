@@ -34,4 +34,6 @@ while True:
         except KeyError as e:
             print("Invalid direction (" + str(userDirection) + ")")
     g.pushGrid(userDirection, nextPiece)
+    print("-----------------")
     print(g)
+    print("-----------------")
