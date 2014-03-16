@@ -1,10 +1,22 @@
 from direction import DIRECTIONS
 from tile import Tile
+import math
 import random
 
 
 class Grid(object):
     """Represent a grid of tiles"""
+    @staticmethod
+    def tileScore(value):
+        # based on http://en.wikipedia.org/wiki/Threes!#Gameplay
+        if value < 3:
+            return 0
+        elif value % 3 == 0:
+            power = math.log(value // 3, 2) + 1
+            return pow(3, power)
+        else:
+            raise AssertionError("tile has invalid value: " + str(value))
+
     def __init__(self, sizeX, sizeY):
         super(Grid, self).__init__()
         self.sizeX = sizeX
@@ -20,6 +32,18 @@ class Grid(object):
             gString = gString[:-1]
             gString += "\n"
         return gString[:-1]
+
+    def tileIterator(self):
+        for i, col in enumerate(self.grid):
+            for j, cell in enumerate(col):
+                yield i, j, cell
+
+    def score(self):
+        score = 0
+        for i, j, cell in self.tileIterator():
+            if cell is not None:
+                score += Grid.tileScore(cell.value)
+        return int(score)
 
     def isValid(self, i, j):
         return 0 <= i < self.sizeX and 0 <= j < self.sizeY, str(i) + ", " + str(j)
