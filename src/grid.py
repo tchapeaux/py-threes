@@ -20,7 +20,7 @@ class Grid(object):
     def __copy__(self):
         copyGrid = Grid(self.sizeX, self.sizeY)
         for i, j, cell in self.tileIterator():
-            if not self.occupied(i, j):
+            if self.occupied(i, j):
                 copyGrid.putTile(i, j, cell)
         return copyGrid
 
