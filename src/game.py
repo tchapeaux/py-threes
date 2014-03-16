@@ -22,7 +22,7 @@ class Game(object):
         # see http://blog.braceyourselfgames.com/post/76156777645/threes-strategies
         # TODO: handle "bonus card"
         assert len(self.nextTileDeck) == 0
-        for val in [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3]:
+        for val in (1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3):
             self.nextTileDeck.append(Tile(val))
         random.shuffle(self.nextTileDeck)
 
