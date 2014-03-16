@@ -16,10 +16,10 @@ class ThreesAI(object):
             if cell is None:
                 score += 4
             else:
-                leftCell = grid[i - 1][j]
-                rightCell = grid[i + 1][j]
-                upCell = grid[i][j - 1]
-                downCell = grid[i][j + 1]
+                leftCell = grid.getTile(i - 1, j, strict=False)
+                rightCell = grid.getTile(i + 1, j, strict=False)
+                upCell = grid.getTile(i, j - 1, strict=False)
+                downCell = grid.getTile(i, j + 1, strict=False)
                 for neighbor in (leftCell, rightCell, upCell, downCell):
                     if neighbor and cell.value == neighbor.value:
                         score += 4
@@ -45,7 +45,6 @@ class ThreesAI(object):
 
     def step(self):
         print("(", self.currentStep, "-", self.game.grid.score(), ")")
-        print(self.game.grid)
         # test each direction and find local best
         bestDir = []
         bestScore = 0
@@ -61,7 +60,8 @@ class ThreesAI(object):
             if len(bestDir) == 0 or directionScore == bestScore:
                 bestDir.append(direction)
                 bestScore = directionScore
-        print("=>", bestDir)
         chosenDir = random.choice(bestDir)
+        print(self.game.grid)
+        print(bestDir, "=>", chosenDir)
         self.game.userInput(chosenDir)
         self.currentStep += 1
