@@ -7,6 +7,9 @@ class Direction(object):
         self.x = x
         self.y = y
 
+    def __repr__(self):
+        return "dir(" + str(self.x) + ", " + str(self.y) + ")"
+
 
 global DIRECTIONS
 DIRECTIONS = {
