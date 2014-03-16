@@ -15,7 +15,14 @@ class Grid(object):
             power = math.log(value // 3, 2) + 1
             return pow(3, power)
         else:
-            raise AssertionError("tile has invalid value: " + str(value))
+            raise AssertionError("Tile has invalid value: " + str(value))
+
+    def __copy__(self):
+        copyGrid = Grid(self.sizeX, self.sizeY)
+        for i, j, cell in self.tileIterator():
+            if not self.occupied(i, j):
+                copyGrid.putTile(i, j, cell)
+        return copyGrid
 
     def __init__(self, sizeX, sizeY):
         super(Grid, self).__init__()
