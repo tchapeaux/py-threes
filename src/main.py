@@ -1,22 +1,9 @@
 import random
 
 from direction import DIRECTIONS
-from grid import Grid
+from grid import randomGrid
 from tile import Tile
 
-
-def randomGrid():
-    initialNumberOfTiles = 6
-    g = Grid(4, 4)
-    for n in range(initialNumberOfTiles):
-        while True:
-            x = random.randint(0, g.sizeX - 1)
-            y = random.randint(0, g.sizeY - 1)
-            if not g.occupied(x, y):
-                break
-        value = random.choice([1, 2, 3])
-        g.grid[x][y] = Tile(value)
-    return g
 
 g = randomGrid()
 print(g)
