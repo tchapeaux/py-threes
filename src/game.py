@@ -10,6 +10,7 @@ class Game(object):
         self.grid = grid
         if self.grid is None:
             self.grid = randomGrid()
+        self.nextTileDeck = []
         self.nextTile = self.getNextTile()
 
     def __copy__(self):
@@ -17,8 +18,16 @@ class Game(object):
         gameCopy.nextTile = self.nextTile
         return gameCopy
 
+    def refillNextTileDeck(self):
+        assert len(self.nextTileDeck) == 0
+        for val in [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3]:
+            self.nextTileDeck.append(Tile(val))
+        random.shuffle(self.nextTileDeck)
+
     def getNextTile(self):
-        return Tile(random.choice([1, 2, 3]))
+        if len(self.nextTileDeck) == 0:
+            self.refillNextTileDeck()
+        return self.nextTileDeck.pop()
 
     def userInput(self, direction):
         self.grid.pushGrid(direction, self.nextTile)
