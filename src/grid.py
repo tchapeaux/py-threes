@@ -59,8 +59,12 @@ class Grid(object):
         assert self.isValid(i, j)
         return self.grid[i][j] is not None
 
-    def getTile(self, i, j):
-        assert self.isValid(i, j)
+    def getTile(self, i, j, strict=True):
+        if not self.isValid(i, j):
+            if strict:
+                raise AssertionError("getTile: out of grid")
+            else:
+                return None
         return self.grid[i][j]
 
     def putTile(self, i, j, newTile):
