@@ -59,6 +59,10 @@ class Grid(object):
         assert self.isValid(i, j)
         return self.grid[i][j] is not None
 
+    def getTile(self, i, j):
+        assert self.isValid(i, j)
+        return self.grid[i][j]
+
     def putTile(self, i, j, newTile):
         if not self.occupied(i, j):
             self.grid[i][j] = newTile
