@@ -53,7 +53,7 @@ class Grid(object):
         return int(score)
 
     def isValid(self, i, j):
-        return 0 <= i < self.sizeX and 0 <= j < self.sizeY, str(i) + ", " + str(j)
+        return 0 <= i < self.sizeX and 0 <= j < self.sizeY
 
     def occupied(self, i, j):
         assert self.isValid(i, j)
