@@ -1,17 +1,16 @@
-import random
-
 from direction import DIRECTIONS
-from grid import randomGrid
-from tile import Tile
+from game import Game
 
 
-g = randomGrid()
-print(g)
+g = Game()
 while True:
-    nextPiece = Tile(random.choice([1, 2, 3]))
+    print("--------------")
+    print(g.grid)
+    print("--------------")
+    print("Current Score:", g.grid.score())
     validInput = False
     while not validInput:
-        print("Next Piece:", nextPiece.value)
+        print("Next Piece:", g.nextTile.value)
         userDirection = input("Direction? (up, down, left, right) ")
         try:
             if userDirection == "quit":
@@ -20,7 +19,4 @@ while True:
             validInput = True
         except KeyError as e:
             print("Invalid direction (" + str(userDirection) + ")")
-    g.pushGrid(userDirection, nextPiece)
-    print("-----------------")
-    print(g)
-    print("-----------------")
+    g.userInput(userDirection)
