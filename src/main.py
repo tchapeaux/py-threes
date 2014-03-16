@@ -1,8 +1,14 @@
+from ai import ThreesAI
 from direction import DIRECTIONS
 from game import Game
 
 
 g = Game()
+ai = ThreesAI(game=g)
+ai.loop()
+
+exit(0)
+
 while True:
     print("--------------")
     print(g.grid)
