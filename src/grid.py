@@ -1,5 +1,6 @@
 from direction import DIRECTIONS
 from tile import Tile
+import copy
 import math
 import random
 
@@ -52,6 +53,12 @@ class Grid(object):
                 score += Grid.tileScore(cell.value)
         return int(score)
 
+    def isStuck(self):
+        for direction in DIRECTIONS.values():
+            if self.canPush(direction):
+                return False
+        return True
+
     def isValid(self, i, j):
         return 0 <= i < self.sizeX and 0 <= j < self.sizeY
 
@@ -90,6 +97,9 @@ class Grid(object):
             return False
 
     def pushGrid(self, direction, newTile):
+        """ Apply push in direction and inserts newTile in a row or column which moved
+            Returns True if the grid changed and False otherwise
+        """
         # the order at which the tiles are treated depends on the direction
         colRange = list(range(self.sizeX))
         rowRange = list(range(self.sizeY))
@@ -114,7 +124,8 @@ class Grid(object):
         # adds the newTile in a row or col which moved (if any)
         movedCols = [i for i, moved in enumerate(moveFlagsCol) if moved]
         movedRows = [i for i, moved in enumerate(moveFlagsRow) if moved]
-        if len(movedCols + movedRows) > 0:
+        hasMoved = len(movedCols + movedRows) > 0
+        if hasMoved:
             chosenRow = random.choice(movedRows)
             chosenCol = random.choice(movedCols)
             if direction == DIRECTIONS["left"]:
@@ -125,6 +136,11 @@ class Grid(object):
                 self.putTile(chosenCol, self.sizeY - 1, newTile)
             elif direction == DIRECTIONS["down"]:
                 self.putTile(chosenCol, 0, newTile)
+        return hasMoved
+
+    def canPush(self, direction):
+        copyGrid = copy.copy(self)
+        return copyGrid.pushGrid(direction, None)
 
 
 def randomGrid():
