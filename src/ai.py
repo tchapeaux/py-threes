@@ -39,7 +39,7 @@ class ThreesAI(object):
         self.currentStep = 0
 
     def loop(self):
-        while self.currentStep <= self.maxSteps:
+        while self.currentStep <= self.maxSteps and not self.game.isStuck():
             self.step()
         print(self.game.grid)
 
@@ -48,7 +48,7 @@ class ThreesAI(object):
         # test each direction and find local best
         bestDir = []
         bestScore = 0
-        for direction in DIRECTIONS.values():
+        for direction in [d for d in DIRECTIONS.values() if self.game.grid.canPush(d)]:
             directionScore = 0
             for i in range(self.testsPerSteps):
                 futureGame = copy.copy(self.game)
@@ -60,6 +60,7 @@ class ThreesAI(object):
             if len(bestDir) == 0 or directionScore == bestScore:
                 bestDir.append(direction)
                 bestScore = directionScore
+        assert len(bestDir) > 0
         chosenDir = random.choice(bestDir)
         print(self.game.grid)
         print(bestDir, "=>", chosenDir)
