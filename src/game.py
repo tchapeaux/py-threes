@@ -18,6 +18,9 @@ class Game(object):
         gameCopy.nextTile = self.nextTile
         return gameCopy
 
+    def isStuck(self):
+        return self.grid.isStuck()
+
     def refillNextTileDeck(self):
         # see http://blog.braceyourselfgames.com/post/76156777645/threes-strategies
         # TODO: handle "bonus card"
