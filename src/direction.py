@@ -10,6 +10,17 @@ class Direction(object):
     def __repr__(self):
         return "dir(" + str(self.x) + ", " + str(self.y) + ")"
 
+    def __str__(self):
+        dirString = ""
+        if self.y == 1:
+            dirString += "DOWN"
+        elif self.y == -1:
+            dirString += "UP"
+        if self.x == 1:
+            dirString += "RIGHT"
+        elif self.x == -1:
+            dirString += "LEFT"
+        return dirString
 
 global DIRECTIONS
 DIRECTIONS = {
