@@ -29,13 +29,14 @@ class ThreesAI(object):
                     score -= 1
         return score
 
-    def __init__(self, game=None, maxSteps=1000, testsPerSteps=100):
+    def __init__(self, game=None, maxSteps=1000, testsPerSteps=100, verbose=False):
         # maxSteps: maximal number of moves
         # testsPerSteps: number of tests averaged for each direction
         super(ThreesAI, self).__init__()
         self.game = game if game else Game()
         self.maxSteps = maxSteps
         self.testsPerSteps = testsPerSteps
+        self.verbose = verbose
         self.currentStep = 0
 
     def loop(self):
@@ -44,7 +45,8 @@ class ThreesAI(object):
         print(self.game.grid)
 
     def step(self):
-        print("(", self.currentStep, "-", self.game.grid.score(), ")")
+        if self.verbose:
+            print("(", self.currentStep, "-", self.game.grid.score(), ")")
         # test each direction and find local best
         bestDir = []
         bestScore = 0
@@ -62,7 +64,8 @@ class ThreesAI(object):
                 bestScore = directionScore
         assert len(bestDir) > 0
         chosenDir = random.choice(bestDir)
-        print(self.game.grid)
-        print(bestDir, "=>", chosenDir)
+        if self.verbose:
+            print(self.game.grid)
+            print(bestDir, "=>", chosenDir)
         self.game.userInput(chosenDir)
         self.currentStep += 1
