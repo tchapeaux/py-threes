@@ -16,10 +16,10 @@ class ThreesAI(object):
             if cell is None:
                 score += 4
             else:
-                leftCell = grid.getTile(i - 1, j, strict=False)
-                rightCell = grid.getTile(i + 1, j, strict=False)
-                upCell = grid.getTile(i, j - 1, strict=False)
-                downCell = grid.getTile(i, j + 1, strict=False)
+                leftCell = grid.getTile(i - 1, j) if grid.isValid(i - 1, j) else None
+                rightCell = grid.getTile(i + 1, j) if grid.isValid(i + 1, j) else None
+                upCell = grid.getTile(i, j - 1) if grid.isValid(i, j - 1) else None
+                downCell = grid.getTile(i, j + 1) if grid.isValid(i, j + 1) else None
                 for neighbor in (leftCell, rightCell, upCell, downCell):
                     if neighbor and cell.merge(neighbor) is not None:
                         score += 4
