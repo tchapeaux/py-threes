@@ -65,6 +65,6 @@ class ThreesAI(object):
         chosenDir = random.choice(bestDir)
         if self.verbose:
             print(self.game.grid)
-            print(bestDir, "=>", chosenDir)
+            print("=>", chosenDir)
         self.game.userInput(chosenDir)
         self.currentStep += 1

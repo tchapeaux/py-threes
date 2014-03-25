@@ -9,7 +9,7 @@ choice = input("Your choice? [1-2] ")
 
 g = Game()
 if choice == "1":
-    ai = ThreesAI(game=g)
+    ai = ThreesAI(game=g, verbose=True)
     ai.loop()
     print(ai.game.grid)
     print("AI score is", ai.game.grid.score())
