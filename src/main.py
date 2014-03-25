@@ -11,6 +11,8 @@ g = Game()
 if choice == "1":
     ai = ThreesAI(game=g)
     ai.loop()
+    print(ai.game.grid)
+    print("AI score is", ai.game.grid.score())
 elif choice == "2":
     while True:
         print("--------------")

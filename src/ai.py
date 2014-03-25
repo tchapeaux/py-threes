@@ -42,7 +42,6 @@ class ThreesAI(object):
     def loop(self):
         while self.currentStep <= self.maxSteps and not self.game.isStuck():
             self.step()
-        print(self.game.grid)
 
     def step(self):
         if self.verbose:
