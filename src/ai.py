@@ -21,7 +21,7 @@ class ThreesAI(object):
                 upCell = grid.getTile(i, j - 1, strict=False)
                 downCell = grid.getTile(i, j + 1, strict=False)
                 for neighbor in (leftCell, rightCell, upCell, downCell):
-                    if neighbor and cell.value == neighbor.value:
+                    if neighbor and cell.merge(neighbor) is not None:
                         score += 4
                 if leftCell and rightCell and leftCell.value == rightCell.value:
                     score -= 1
