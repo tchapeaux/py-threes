@@ -29,7 +29,7 @@ class ThreesAI(object):
                     score -= 1
         return score
 
-    def __init__(self, game=None, maxSteps=1000, testsPerSteps=100, verbose=False):
+    def __init__(self, game=None, maxSteps=1000, testsPerSteps=10, verbose=False):
         # maxSteps: maximal number of moves
         # testsPerSteps: number of tests averaged for each direction
         super(ThreesAI, self).__init__()
