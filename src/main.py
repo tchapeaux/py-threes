@@ -7,13 +7,19 @@ print("1) Launch AI")
 print("2) Play yourself")
 choice = input("Your choice? [1-2] ")
 
-g = Game()
 if choice == "1":
-    ai = ThreesAI(game=g, verbose=True)
-    ai.loop()
-    print(ai.game.grid)
-    print("AI score is", ai.game.grid.score())
+    maxValues = {}
+    for i in range(100):
+        print(i + 1, "/", 100)
+        ai = ThreesAI(game=Game())
+        ai.loop()
+        maxValue = ai.game.grid.maxValue()
+        if maxValue not in maxValues:
+            maxValues[maxValue] = 0
+        maxValues[maxValue] += 1
+    print(maxValues)
 elif choice == "2":
+    g = Game()
     while True:
         print("--------------")
         print(g.grid)
