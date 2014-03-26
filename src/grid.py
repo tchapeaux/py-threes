@@ -53,6 +53,9 @@ class Grid(object):
                 score += Grid.tileScore(cell.value)
         return int(score)
 
+    def maxValue(self):
+        return max([cell.value for i, j, cell in self.tileIterator() if cell])
+
     def isStuck(self):
         for direction in DIRECTIONS.values():
             if self.canPush(direction):
